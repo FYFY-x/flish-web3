@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<style>
+/* ============================================================
+   轻音乐阅读夜 · Soft Music Reading
+   第四次上机作业  job4.html
+   姓 wu · 学号末四位 0334 · 学号末位 4
+   ------------------------------------------------------------
+   标签白名单：html head style body h1-h6 p div table tr th td a br
+   （没有 meta、title、ul、li、span、img、form、input、audio、embed）
+   ============================================================ */
+
+/* ---------- 1. body：负责把 .page 居中，并给页面留白 ---------- */
+body {
+    margin: 0;
+    padding: 26px 16px 40px;
+    background-color: #f2ece7;      /* 卡片外面的底色，让粉色卡片浮起来 */
+    text-align: center;              /* 让 inline-block 的 .page 水平居中 */
+    font-family: "Microsoft YaHei", "微软雅黑", Georgia, serif;
+    font-size: 15px;
+    line-height: 1.95;
+    color: #4a3b42;
+}
+
+/* ---------- 2. 题目指定的 .page（只改了 background-color） ---------- */
+.page {
+    display: inline-block;
+    background-color: #FFE6EE;
+    box-shadow: 0 0 30px rgba(80, 58, 35, 0.25);
+    text-align: left;
+    max-width: 720px;
+}
+
+/* ---------- 3. 并集选择器：六个级别的标题统一风格 ---------- */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #7d4a5e;
+    margin: 0;
+}
+
+/* 主标题 */
+h1 {
+    font-size: 29px;
+    text-align: center;
+    padding: 34px 36px 16px;
+    border-bottom: 2px solid #f2c4d5;
+}
+
+/* 各区域小标题 */
+h2 {
+    font-size: 20px;
+    margin: 30px 0 14px;
+    padding-left: 12px;
+    border-left: 5px solid #e88bab;
+}
+
+h3 {
+    font-size: 17px;
+    margin: 28px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #f2c4d5;
+}
+
+/* ---------- 4. 区域容器（只负责左右留白，不碰 .page） ---------- */
+.section {
+    padding: 0 36px;
+}
+
+/* ---------- 5. 正文段落 ---------- */
+p {
+    margin: 0 0 14px;
+    font-size: 15px;
+    text-align: justify;
+}
+
+/* ---------- 6. 伪元素：每个段落首字母放大（首字下沉） ---------- */
+p::first-letter {
+    font-size: 1.9em;
+    font-weight: 700;
+    color: #d4608c;
+    padding-right: 2px;
+}
+
+/* ---------- 7. ID 选择器：重要提示要明显强调 ---------- */
+p#intro {
+    font-size: 15px;
+    font-weight: 700;
+    color: #a8325c;
+    background-color: #fff4f8;
+    border: 1px dashed #e88bab;
+    padding: 14px 18px;
+    margin: 20px 0 6px;
+    line-height: 1.85;
+}
+
+/* ---------- 8. 表格 ---------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 10px;
+    font-size: 14px;
+    background-color: #fffcfd;
+}
+
+th, td {
+    border: 1px solid #f2c4d5;
+    padding: 10px 8px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+th {
+    background-color: #ffdcea;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* ---------- 9. 后代选择器 div table a ----------
+   只有「div 里面 → table 里面 → a」这三层都满足时才生效。
+   所以表格里必须真的放一个超链接，这条样式才有对象。 */
+div table a {
+    color: #34708f;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px dotted #34708f;
+}
+
+div table a:hover {
+    color: #d4608c;
+    border-bottom-color: #d4608c;
+}
+
+/* ---------- 10. 链接伪类 ----------
+   顺序有讲究：:link → :visited → :hover → :active（记作 LVHA）。
+   如果把 :link 写在 :hover 后面，悬停变色就会被 :link 盖掉。 */
+a:link {
+    color: #b03a63;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #9a6f85;
+}
+
+a:hover {
+    color: #e0518f;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #7d4a5e;
+}
+
+/* ---------- 11. 带类名的链接 a.red / a.blue ---------- */
+a.red {
+    color: #c0392b;
+    border-bottom: 2px solid #c0392b;
+}
+
+a.blue {
+    color: #2f6fa8;
+    border-bottom: 2px solid #2f6fa8;
+}
+
+a.red:hover,
+a.blue:hover {
+    text-decoration: none;
+    background-color: #fff4f8;
+}
+
+/* ---------- 12. 页面链接区 ---------- */
+.link-area {
+    margin: 30px 0 8px;
+    padding: 0 36px;
+    text-align: center;
+}
+
+.link-area a {
+    display: inline-block;
+    padding: 8px 22px;
+    margin: 6px 8px;
+    border-radius: 4px;
+    background-color: #fffafc;
+}
+
+/* ---------- 13. 伪元素：每个 div 的第一行 ----------
+   实际生效的是有直接文字的 div（这里是底部公告区），
+   标题类的 div 第一行是块级元素，不会命中。 */
+div::first-line {
+    letter-spacing: 1.2px;
+    color: #8a5a70;
+}
+
+/* ---------- 14. 底部公告区 ---------- */
+.notice {
+    margin: 28px 0 0;
+    padding: 18px 36px 38px;
+    border-top: 1px dashed #f2c4d5;
+    font-size: 13.5px;
+    line-height: 2.05;
+    color: #7a6a72;
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+    <!-- ========== ① 顶部标题区 ========== -->
+    <div class="header">
+        <h1>轻音乐阅读夜 · Soft Music Reading</h1>
+    </div>
+
+    <!-- ========== ② 活动介绍区 ========== -->
+    <div class="section">
+        <h2 id="intro">本周主题：把灯光调暗，把音乐放轻</h2>
+
+        <p>周五的晚上八点，我们会把书架之间那片空地铺上软垫，摆几盏暖黄色的小灯，放一张很轻很轻的唱片。你不需要准备什么，只要带一本最近在读的书，坐下来，让它陪你度过一个不匆忙的夜晚。</p>
+
+        <p>音乐是这场阅读的一半。我们挑的曲子都没有太快的鼓点，多是钢琴、大提琴和一点若有若无的吉他，像雨落在窗台上，不打扰你翻页，也不打断你的思绪。你可以读，也可以只是听着，闭上眼睛待一会儿，都很好。</p>
+
+        <p>如果你想认识新朋友，可以在中场休息时和邻座聊聊手里的那本书；如果你只想安静地待着，也不会有人来打扰你。我们相信，一个温柔的夜晚，应该由每个人自己决定它的样子。</p>
+
+        <p id="intro">本场活动限 24 人，坐席按报名先后安排，请务必留下能够联系的手机号。活动全程请将手机调至静音，如需接听电话，请到阅读区外的走廊轻声交谈。</p>
+    </div>
+
+    <!-- ========== ③ 活动报名信息表格区 ========== -->
+    <div class="section">
+        <h3>活动报名名单</h3>
+
+        <table>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>联系方式</th>
+                <th>阅读状态</th>
+            </tr>
+            <tr>
+                <td>01</td>
+                <td><a href="#intro">林知夏</a></td>
+                <td>138****0001</td>
+                <td>专注中</td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td><a href="#intro">周予安</a></td>
+                <td>139****0007</td>
+                <td>松弛中</td>
+            </tr>
+            <tr>
+                <td>03</td>
+                <td><a href="#intro">苏晚</a></td>
+                <td>137****0022</td>
+                <td>聆听中</td>
+            </tr>
+            <tr>
+                <td>04</td>
+                <td><a href="#intro">陈一白</a></td>
+                <td>135****0038</td>
+                <td>专注中</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- ========== ④ 页面链接区 ========== -->
+    <div class="link-area">
+        <div>
+            <a class="red" href="../web-hw2/wu-0334-work2.html">查看往期活动照片</a>
+            <a class="blue" href="#notice">在线咨询活动详情</a>
+        </div>
+    </div>
+
+    <!-- ========== ⑤ 底部公告区 ========== -->
+    <div class="notice" id="notice">
+        公告一：本场活动为公益性质，不收取任何费用；现场提供热水与简易茶点，请自带水杯，尽量不用一次性纸杯。<br>
+        公告二：如需请假或转让名额，请提前一天在活动群里告知管理员，方便把座位让给候补的同学。<br>
+        公告三：活动结束后请带走自己的书本与垃圾，把软垫归位，让下一位读者也能遇见干净的场地。<br>
+        咨询方式：图书馆二楼服务台，或在本页留言给我们。期待与你，在一个轻轻的夜晚相遇。
+    </div>
+
+</div>
+</body>
+</html>
