@@ -2,28 +2,17 @@
 <html lang="zh-CN">
 <head>
 <style>
-/* ============================================================
-   轻音乐阅读夜 · Soft Music Reading
-   第四次上机作业  job4.html
-   姓 wu · 学号末四位 0334 · 学号末位 4
-   ------------------------------------------------------------
-   标签白名单：html head style body h1-h6 p div table tr th td a br
-   （没有 meta、title、ul、li、span、img、form、input、audio、embed）
-   ============================================================ */
 
-/* ---------- 1. body：负责把 .page 居中，并给页面留白 ---------- */
 body {
     margin: 0;
     padding: 26px 16px 40px;
-    background-color: #f2ece7;      /* 卡片外面的底色，让粉色卡片浮起来 */
-    text-align: center;              /* 让 inline-block 的 .page 水平居中 */
+    background-color: #f2ece7;
+    text-align: center;
     font-family: "Microsoft YaHei", "微软雅黑", Georgia, serif;
     font-size: 15px;
     line-height: 1.95;
     color: #4a3b42;
 }
-
-/* ---------- 2. 题目指定的 .page（只改了 background-color） ---------- */
 .page {
     display: inline-block;
     background-color: #FFE6EE;
@@ -32,7 +21,6 @@ body {
     max-width: 720px;
 }
 
-/* ---------- 3. 并集选择器：六个级别的标题统一风格 ---------- */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     letter-spacing: 1px;
@@ -40,7 +28,6 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
-/* 主标题 */
 h1 {
     font-size: 29px;
     text-align: center;
@@ -48,7 +35,6 @@ h1 {
     border-bottom: 2px solid #f2c4d5;
 }
 
-/* 各区域小标题 */
 h2 {
     font-size: 20px;
     margin: 30px 0 14px;
@@ -63,19 +49,17 @@ h3 {
     border-bottom: 1px solid #f2c4d5;
 }
 
-/* ---------- 4. 区域容器（只负责左右留白，不碰 .page） ---------- */
 .section {
     padding: 0 36px;
 }
 
-/* ---------- 5. 正文段落 ---------- */
+
 p {
     margin: 0 0 14px;
     font-size: 15px;
     text-align: justify;
 }
 
-/* ---------- 6. 伪元素：每个段落首字母放大（首字下沉） ---------- */
 p::first-letter {
     font-size: 1.9em;
     font-weight: 700;
@@ -83,7 +67,6 @@ p::first-letter {
     padding-right: 2px;
 }
 
-/* ---------- 7. ID 选择器：重要提示要明显强调 ---------- */
 p#intro {
     font-size: 15px;
     font-weight: 700;
@@ -95,7 +78,6 @@ p#intro {
     line-height: 1.85;
 }
 
-/* ---------- 8. 表格 ---------- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -117,9 +99,6 @@ th {
     letter-spacing: 1px;
 }
 
-/* ---------- 9. 后代选择器 div table a ----------
-   只有「div 里面 → table 里面 → a」这三层都满足时才生效。
-   所以表格里必须真的放一个超链接，这条样式才有对象。 */
 div table a {
     color: #34708f;
     font-weight: 700;
@@ -132,9 +111,6 @@ div table a:hover {
     border-bottom-color: #d4608c;
 }
 
-/* ---------- 10. 链接伪类 ----------
-   顺序有讲究：:link → :visited → :hover → :active（记作 LVHA）。
-   如果把 :link 写在 :hover 后面，悬停变色就会被 :link 盖掉。 */
 a:link {
     color: #b03a63;
     text-decoration: none;
@@ -153,7 +129,6 @@ a:active {
     color: #7d4a5e;
 }
 
-/* ---------- 11. 带类名的链接 a.red / a.blue ---------- */
 a.red {
     color: #c0392b;
     border-bottom: 2px solid #c0392b;
@@ -170,7 +145,6 @@ a.blue:hover {
     background-color: #fff4f8;
 }
 
-/* ---------- 12. 页面链接区 ---------- */
 .link-area {
     margin: 30px 0 8px;
     padding: 0 36px;
@@ -185,15 +159,11 @@ a.blue:hover {
     background-color: #fffafc;
 }
 
-/* ---------- 13. 伪元素：每个 div 的第一行 ----------
-   实际生效的是有直接文字的 div（这里是底部公告区），
-   标题类的 div 第一行是块级元素，不会命中。 */
 div::first-line {
     letter-spacing: 1.2px;
     color: #8a5a70;
 }
 
-/* ---------- 14. 底部公告区 ---------- */
 .notice {
     margin: 28px 0 0;
     padding: 18px 36px 38px;
